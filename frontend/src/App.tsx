@@ -4,6 +4,7 @@ import {Button, TextField, Box} from "@material-ui/core";
 import styled from "styled-components";
 import {NoHeaders} from "./no-header-requests";
 import {WithHeaders} from "./with-header-requests";
+import {WithPreflight} from "./with-preflight-requests";
 
 
 function App(): JSX.Element {
@@ -12,9 +13,8 @@ function App(): JSX.Element {
     return (
         <Page>
             <Row>
-            <Column>
+                <Column>
 
-                <Box>
                     <h3>No headers in backend</h3>
                     <StyledButton variant={"contained"} onClick={() => doRequest(NoHeaders.sendSimpleGetRequest)}>
                         Send simple GET request
@@ -22,33 +22,41 @@ function App(): JSX.Element {
                     <StyledButton variant={"contained"} onClick={() => doRequest(NoHeaders.sendSimpleOpaqueGetRequest)}>
                         Send simple opaque GET request
                     </StyledButton>
-                    <StyledButton variant={"contained"}
-                                  onClick={() => doRequest(NoHeaders.sendSimpleOpaqueGetRequestWithCookies)}>
-                        Send opaque GET request with cookies
-                    </StyledButton>
-                </Box>
-            </Column>
+                </Column>
 
-            <Column>
-
-                <Box>
+                <Column>
                     <h3>Headers in backend</h3>
-                    <StyledButton variant={"contained"} color="secondary" onClick={() => doRequest(WithHeaders.sendGetRequest)}>
+                    <StyledButton variant={"contained"} color="secondary"
+                                  onClick={() => doRequest(WithHeaders.sendGetRequest)}>
                         Send GET request
                     </StyledButton>
-                    <StyledButton variant={"contained"} color="secondary" onClick={() => doRequest(WithHeaders.sendPostRequest)}>
+                    <StyledButton variant={"contained"} color="secondary"
+                                  onClick={() => doRequest(WithHeaders.sendPostRequest)}>
                         Send POST request
                     </StyledButton>
-                    <StyledButton variant={"contained"} color="secondary" onClick={() => doRequest(WithHeaders.sendPostRequestWithFunnyHeader)}>
+                    <StyledButton variant={"contained"} color="secondary"
+                                  onClick={() => doRequest(WithHeaders.sendPostRequestWithFunnyHeader)}>
                         Send POST request with funny header
                     </StyledButton>
-
-                    <StyledButton variant={"contained"} color="secondary" onClick={() => doRequest(WithHeaders.sendDeleteRequestWithCookies)}>
-                        Send DELETE request with cookies
+                    <StyledButton variant={"contained"} color="secondary"
+                                  onClick={() => doRequest(WithHeaders.sendDeleteRequest)}>
+                        Send DELETE request
                     </StyledButton>
 
-                </Box>
-            </Column>
+                </Column>
+                <Column>
+                    <h3>Headers and preflight support in backend</h3>
+                    <StyledButton variant={"contained"} color="primary"
+                                  onClick={() => doRequest(WithPreflight.sendPostRequestWithFunnyHeader)}>
+                        Send POST request with funny header
+                    </StyledButton>
+                    <StyledButton variant={"contained"} color="primary"
+                                  onClick={() => doRequest(WithPreflight.sendDeleteRequest)}>
+                        Send DELETE request
+                    </StyledButton>
+
+                </Column>
+
             </Row>
             <Box component={"div"}>
                 <TextField multiline value={response}/>

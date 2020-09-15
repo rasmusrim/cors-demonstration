@@ -34,7 +34,7 @@ export class WithHeaders {
         })
     }
 
-    static sendDeleteRequestWithCookies(): Promise<string> {
+    static sendDeleteRequest(): Promise<string> {
         return new Promise(resolve => {
             fetch("http://localhost:3000/with-headers", {
                     method: 'DELETE',
